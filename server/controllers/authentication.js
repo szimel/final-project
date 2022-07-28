@@ -9,8 +9,6 @@ function tokenForUser(user) {
 };
 
 exports.signin = function(req, res, next) {
-  // User has already had their email and password auth'd
-  // We just need to give them a token
   res.send({
     token: tokenForUser(req.user)
   });
@@ -20,9 +18,9 @@ exports.currentUser = function(req, res) {
   const user = {
     email: req.user.email,
     token: tokenForUser(req.user),
-    watchListCount: req.user.watchList.length
+    id: req.user
   };
-
+  console.log(user);
   res.send(user);
 };
 

@@ -2,25 +2,40 @@ import BasicNavbar from "./basic-navbar"
 import { useForm } from "react-hook-form";
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { newCategory } from "../actions/index";
+import { currentUser, newCategory } from "../actions/index";
 
 const categorySchema = Yup.object().shape({
   category: Yup.string().required()
 });
 
+
 const Category = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const doesSomething = () => {
+    dispatch(currentUser());
+  }
+
+  doesSomething();
+
+  
   const { register, handleSubmit, formState: { errors }} = useForm({
     resolver: yupResolver(categorySchema)
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+
+  const auth = useSelector(state => state)
+  console.log(auth);
+
+
 
   const handleFormSubmit = (data) => {
     dispatch(newCategory(data, () => {
-      navigate("../", { replace: true });
+      navigate("/", { replace: true });
     }));
   };
 
