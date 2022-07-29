@@ -14,29 +14,21 @@ const Video = require('../models/video');
 // };
 
 exports.newCategory = function(req, res) {
-  // console.log(req);
-  console.log(User.findOne({}))
-  console.log(User.users)
-  console.log(User.collection.user)
-
-
-  // User.findOne({_id: req.user._id}, function (err, user) {
-
-  //   const category = new Category.CategoryModel(req.body.category);
-  //   // console.log(User.collection.collections)
-  //   category.name = req.params.category;
-  //   category.save(function (err, category) {
-  //     console.log(user)
-  //     user.categories.push(category);
-
-  //     user.save(function (err, user) {
-  //       res.send({
-  //         category,
-  //         category: user.categories
-  //       });
-  //     });
-  //   });
-  // })
+  User.findOne({_id: req.user._id}, function (err, user) {
+    console.log('WORKED!!!');
+    const cAtegory = new Category.CategoryModel({name: req.params.category});
+    cAtegory.save(function (err, category) {
+      user.categories.push(category);
+      console.log('ppushed')
+      console.log(user)
+      user.save(function (err, user) {
+        res.send({
+          category,
+          category: user.category
+        });
+      });
+    });
+  })
 }
 
 

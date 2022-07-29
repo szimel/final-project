@@ -18,7 +18,8 @@ exports.currentUser = function(req, res) {
   const user = {
     email: req.user.email,
     token: tokenForUser(req.user),
-    id: req.user
+    id: req.user._id,
+    categories: req.user.categories
   };
   console.log(user);
   res.send(user);

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { signup } from '../actions';
+import { currentUser, signup } from '../actions';
 import BasicNavbar from './basic-navbar';
 
 const userSchema = Yup.object().shape({

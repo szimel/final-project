@@ -17,10 +17,10 @@ const Search = () => {
     if (Search === undefined) {
       Search = '';
     };
-    const urlFormat = encodeURIComponent(Search) 
+    const urlFormat = encodeURIComponent(Search) ;
     console.log(urlFormat);
     dispatch(videoSearch(urlFormat));
-  }
+  };
 
   return (
     <Col className="container">
@@ -32,10 +32,10 @@ const Search = () => {
           aria-label="Search"
           onChange={validateSearch}
         />
-      <Button variant="outline-success" onClick={handleSubmit}>Search</Button>
+      <Button variant="outline-primary" onClick={handleSubmit}>Search</Button>
     </Form> 
   </Col>
-  )
-}
+  );
+};
 
 export default Search;

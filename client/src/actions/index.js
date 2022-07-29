@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_USER, AUTH_ERROR, CURRENT_USER } from './types'
+import { AUTH_USER, AUTH_ERROR, CURRENT_USER, USER_CATEGORY } from './types'
 
 
 const ROOT_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='
@@ -20,19 +20,26 @@ export const VIDEOS = 'VIDEOS'
 // };
 
 //make new category
-export const newCategory = (data) => dispatch => {
+export const newCategory = (data, callback) => dispatch => {
+  debugger;
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }
+  }
   const urlFormat = encodeURIComponent(data.category)
-  const url = `${SERVER_URL}/category:${urlFormat}`
+  const url = `${SERVER_URL}/category${urlFormat}`
   console.log(url);
-  axios.post(url, {category: data.category})
-  
-  // .then(function (response) {
-  //   dispatch({type: CATEGORIES, payload: response.data})
-  // })
-  // .then(function (response) {
-  //   dispatch({ type: CATEGORIES, payload: response.data })
-  // });
-}
+  axios.post(url, { id: callback }, config)
+  .then(function (response) {
+    dispatch({ type: USER_CATEGORY, payload: response.data });
+    callback();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
+
 
 export const videoSearch = (search) => dispatch => {
   const url = `${ROOT_URL}${search}&type=video&key=AIzaSyBKm9bJHd2C1dRZtHdDQQsF4Ycp_sjHqX4`
@@ -40,8 +47,8 @@ export const videoSearch = (search) => dispatch => {
   axios.get(url)
   .then(function (response) {
     dispatch({type: VIDEOS, payload: response.data})
-  })
-}
+  });
+};
 
 export const signup = (formProps, callback) => dispatch => {
   axios.post(
@@ -78,31 +85,40 @@ export const signout = (callback) => dispatch => {
   callback()
 };
 
-export const fetchUser = () => dispatch => {
+// export const fetchUser = () => dispatch => {
+//   const config = {
+//     headers: {
+//       Authorization: 'Bearer ' + localStorage.getItem('token'),
+//     }
+//   };
+
+//   axios.get(
+//     `${SERVER_URL}/auth/current_user`,
+//     config
+//   ).then(function (response) {
+//     dispatch({ type: CURRENT_USER, payload: response.data });
+//     localStorage.setItem('token', response.data.token);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+// };
+
+export const currentUser = () => dispatch => {
+
   const config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     }
-  };
+  }
 
   axios.get(
-    `${SERVER_URL}/auth/current_user`,
+    `http://localhost:5000/auth/current_user`,
     config
-  ).then(function (response) {
-    debugger;
-    dispatch({ type: CURRENT_USER, payload: response.data });
-    localStorage.setItem('token', response.data.token);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-};
-
-export const currentUser = () =>  {
-  const request = axios.get(`http://localhost:5000/auth/current_user`)
-
-  return {
-    type: CURRENT_USER,
-    payload: request
-  }
+    ).then(function (response) {
+      dispatch({ type: CURRENT_USER, payload: response.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };

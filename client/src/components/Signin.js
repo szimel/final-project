@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { signin } from '../actions';
+import { currentUser, signin } from '../actions';
 import BasicNavbar from './basic-navbar';
 
 const userSchema = Yup.object().shape({
@@ -17,11 +17,12 @@ const Signin = () => {
     resolver: yupResolver(userSchema)
   });
 
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
-    console.log(data);
     dispatch(signin(data, () => {
       navigate("/", { replace: true });
     }));

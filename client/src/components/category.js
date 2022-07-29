@@ -5,35 +5,27 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { currentUser, newCategory } from "../actions/index";
+import { useEffect } from "react";
 
 const categorySchema = Yup.object().shape({
   category: Yup.string().required()
 });
 
-
 const Category = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const doesSomething = () => {
-    dispatch(currentUser());
-  }
-
-  doesSomething();
-
-  
+  // useEffect(() => {
+  //   dispatch(currentUser());
+  // }, []);
+  // const id = useSelector(state => state.currentUser);
+  // console.log(id);
+ 
   const { register, handleSubmit, formState: { errors }} = useForm({
     resolver: yupResolver(categorySchema)
   });
 
-
-
-  const auth = useSelector(state => state)
-  console.log(auth);
-
-
-
-  const handleFormSubmit = (data) => {
+  const HandleFormSubmit = (data) => {
     dispatch(newCategory(data, () => {
       navigate("/", { replace: true });
     }));
@@ -45,7 +37,7 @@ const Category = () => {
       <BasicNavbar />
     </div>
     <div className='container pt-3'>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <form onSubmit={handleSubmit(HandleFormSubmit)}>
         <div className='form-group row col-4'>
           <label>New Category</label>
           <input

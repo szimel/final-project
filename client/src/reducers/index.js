@@ -7,7 +7,7 @@ import currentUserReducer from "./current-user";
 const rootReducer = combineReducers({
   auth: AuthReducer,
   videos: videoReducer,
-  category: categoryReducer,
+  userCategory: categoryReducer,
   currentUser: currentUserReducer
 });
 
