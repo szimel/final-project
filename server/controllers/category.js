@@ -31,28 +31,11 @@ exports.newCategory = function(req, res) {
   })
 }
 
-
-//adding video to category
-// exports.addToCategory = function(req, res) {
-//   Category.CategoryModel.findOne({name: req.params.category}, function (err, category) {
-//     const video = new Video.VideoModel(req.body.video);
-
-//     video.save(function(err, video) {
-//       category.videos.push(video);
-
-//       category.save(function (err, category) {
-//         res.send({
-//           video,
-//           videoListCount: category.videos.length
-//         });
-//       })
-//     })
-//   })
-// }
-
-exports.addToCategory = function(req, res) {
+exports.addVideoToCategory = function(req, res) {
   User.findOne({_id: req.user._id}, function (err, user) {
-    Category.CategoryModel.findOne({name: req.params.category}, function (err, category) {
+    console.log('User Success');
+    console.log(req.body)
+    Category.CategoryModel.findOne({_id: req.body.id}, function (err, category) {
       const video = new Video.VideoModel(req.body.video);
   
       video.save(function(err, video) {

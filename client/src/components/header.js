@@ -37,7 +37,7 @@ const Header = () => {
     } else {
       for (let i = 0; i < Data.length; i++) {
         categories.push(
-            <NavDropdown.Item>{Data[i].name}</NavDropdown.Item>
+            <NavDropdown.Item key={[i]}>{Data[i].name}</NavDropdown.Item>
         );
       };
       return categories;

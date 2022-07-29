@@ -12,6 +12,6 @@ module.exports = function(app) {
   app.post('/auth/signup', Authentication.signup);
   app.get('/auth/current_user', requireAuth, Authentication.currentUser);
   app.post('/category:category', requireAuth, Category.newCategory);
-  app.post('/category:category/add', Category.addToCategory);
+  app.post('/video', requireAuth, Category.addVideoToCategory);
   app.get('/category', Category.getCategory);
 };

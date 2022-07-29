@@ -8,20 +8,26 @@ const SERVER_URL = 'http://localhost:5000';
 
 export const VIDEOS = 'VIDEOS'
 
-// //get users categories
-// export const categories = () => {
-//   const request = axios.get(
-//     `${SERVER_URL}/category`
-//   )
-//   return {
-//     type: AUTH_USER,
-//     payload: response.data
-//   };
-// };
+//add video to category
+export const addToCategory = (id, callback) => dispatch => {
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }
+  }
+  debugger;
+  axios.post(`${SERVER_URL}/video`, {id: id}, config)
+  .then(function (response) {
+    dispatch({ type: USER_CATEGORY, payload: response.data });
+    callback();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
 
 //make new category
 export const newCategory = (data, callback) => dispatch => {
-  debugger;
   const config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -40,11 +46,11 @@ export const newCategory = (data, callback) => dispatch => {
   });
 };
 
-
+//search 
 export const videoSearch = (search) => dispatch => {
   const url = `${ROOT_URL}${search}&type=video&key=AIzaSyBKm9bJHd2C1dRZtHdDQQsF4Ycp_sjHqX4`
   console.log(url);
-  axios.get(url)
+  axios.get(url, { searched: search})
   .then(function (response) {
     dispatch({type: VIDEOS, payload: response.data})
   });
