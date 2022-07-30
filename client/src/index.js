@@ -9,7 +9,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import React from 'react';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
-import Category from "./components/category";
+import Category from "./components/new-category";
+import UserCategory from './components/category'
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
@@ -21,7 +22,8 @@ render (
         </Route>
         <Route path="signup" element={<Signup />}/>
         <Route path="signin" element={<Signin />} />
-        <Route path='category' element={<Category />} />
+        <Route path='new-category' element={<Category />} />
+        <Route path='category' element={<UserCategory />} />
       </Routes>
     </Router>
   </Provider>,

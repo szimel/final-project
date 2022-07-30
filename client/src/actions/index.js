@@ -1,22 +1,50 @@
 import axios from "axios";
-import { AUTH_USER, AUTH_ERROR, CURRENT_USER, USER_CATEGORY } from './types'
+import { AUTH_USER, AUTH_ERROR, CURRENT_USER, USER_CATEGORY, VIDEO_ID, VIDEOS, CATEGORY_ID } from './types'
 
 
 const ROOT_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='
 const SERVER_URL = 'http://localhost:5000';
 
 
-export const VIDEOS = 'VIDEOS'
+//add specific category id to state
+export const findSpecificCategory = (id, i, callback) => dispatch => {
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }
+  };
+  axios.post(`${SERVER_URL}/category`, {categoryId: id, categoryArray: i}, config)
+  .then(function (response) {
+    dispatch({ type: CATEGORY_ID, payload: response.data });
+    callback();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+//add video id to state
+export const videoId = (id, Video) => dispatch => {
+  axios.post(`${SERVER_URL}/videoId`, {videoId: id})
+  .then(function (response) {
+    dispatch({ type: VIDEO_ID, payload: response.data });
+  })
+}
 
 //add video to category
-export const addToCategory = (id, callback) => dispatch => {
+export const addToCategory = (id, video, i, callback) => dispatch => {
   const config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     }
   }
+  const data = {
+    id: id,
+    video: video,
+    categoryArray: i,
+  };
   debugger;
-  axios.post(`${SERVER_URL}/video`, {id: id}, config)
+  axios.post(`${SERVER_URL}/video`, { data }, config)
   .then(function (response) {
     dispatch({ type: USER_CATEGORY, payload: response.data });
     callback();

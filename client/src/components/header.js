@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Search from './search';
 import { signout } from '../actions';
-import { currentUser } from '../actions';
+import { currentUser, findSpecificCategory } from '../actions';
 import '../App.css';
+
 
 const Header = () => {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const authenticated = useSelector(state => state.auth.authenticated);
+
+  const check = useSelector(state => state.categoryId);
+  console.log(check)
 
   useEffect (() => {
   dispatch(currentUser());
@@ -18,15 +22,19 @@ const Header = () => {
 
   const handleSignOutClick = () => {
     dispatch(signout(() => {
-      history.push('/');
+      navigate.push('/');
     }));
   };
 
-
-
-  const data = useSelector(state => state.currentUser);
+  const categoryClick = (id, i) => {
+    console.log('click')
+    dispatch(findSpecificCategory(id, i, () => {
+      navigate('category', { replace: true });
+    }));
+  }
 
   //category dropdown
+  const data = useSelector(state => state.currentUser);
   let categories = [];
   let Data = data.categories;
   const renderCategories = () => {
@@ -37,7 +45,8 @@ const Header = () => {
     } else {
       for (let i = 0; i < Data.length; i++) {
         categories.push(
-            <NavDropdown.Item key={[i]}>{Data[i].name}</NavDropdown.Item>
+            <NavDropdown.Item key={[i]} onClick={() => 
+            categoryClick(Data[i]._id, i)}>{Data[i].name}</NavDropdown.Item>
         );
       };
       return categories;
@@ -50,7 +59,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand href="/">Categorizer</Navbar.Brand>
         <Nav className='me-auto'>
-          <Nav.Link href="category">New Category</Nav.Link>
+          <Nav.Link href="new-category">New Category</Nav.Link>
           <NavDropdown title="My Categories">{renderCategories()}</NavDropdown>
         </Nav>
         <Nav className='ms-auto me-2'>

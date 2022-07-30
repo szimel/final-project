@@ -1,17 +1,25 @@
 import { Card } from "react-bootstrap";
-import { Row, Container, Dropdown } from "react-bootstrap";
+import { Row, Container, } from "react-bootstrap";
+import { videoId } from "../actions";
 import Modal from './modal'
-const { useSelector } = require("react-redux")
+const { useSelector, useDispatch } = require("react-redux")
 
 
 
 const Cards = () => {
+  const dispatch = useDispatch();
   const videos = useSelector(state => state.videos);
+
 
   //youtube video cards
   let cards = [];
   const click = (id) => {
     window.open(`https://www.youtube.com/watch?v=${id}`)
+  }
+
+  //video id used for adding to category
+  const cardId = (id) => {
+    dispatch(videoId(id));
   }
 
   const renderVideos = () => {
@@ -24,7 +32,10 @@ const Cards = () => {
             <Card.Img varient='top' src={videos[i].snippet.thumbnails.medium.url} onClick={() => click(videos[i].id.videoId)}/>
             <Card.Body>
               <Card.Title onClick={() => click(videos[i].id.videoId)}>{videos[i].snippet.title}</Card.Title>
-              <Modal />
+              <div onClick={() => cardId(videos[i].id.videoId)}>
+                <Modal />
+              </div>
+
             </Card.Body>
           </Card>
         )

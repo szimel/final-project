@@ -18,7 +18,6 @@ const Search = () => {
       Search = '';
     };
     const urlFormat = encodeURIComponent(Search) ;
-    console.log(urlFormat);
     dispatch(videoSearch(urlFormat));
   };
 

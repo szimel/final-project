@@ -14,13 +14,23 @@ const VideoToCategory = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const videoId = useSelector(state => state.videoId);
+  const videos = useSelector(state => state.videos);
+
   useEffect(() => {
     dispatch(currentUser());
     }, []);
   
   //sends request to backend
-  const handleClick = (id) => {
-    dispatch(addToCategory(id, () => {
+  const handleClick = (id, i) => {
+    //format video info
+    const videoFinder = videos.find(video => video.id.videoId === videoId);
+    const videoFormat = {
+      url: `www.youtube.com/watch?v=${videoFinder.id.videoId}`,
+      title: videoFinder.snippet.title,
+      thumbnail: videoFinder.snippet.thumbnails.medium.url
+    };
+    dispatch(addToCategory(id, videoFormat, i, () => {
       navigate("/", { replace: true });
     }))
   }
@@ -30,14 +40,14 @@ const VideoToCategory = () => {
   let categories = [];
   let Data = data.categories;
   const renderCategories = () => {
-    if(Data === [] || Data === undefined) {
+    if(Data === [] || Data === undefined || Data.length === 0) {
       return (
           <p>No categories to add to!</p>
       ) 
     } else {
       for (let i = 0; i < Data.length; i++) {
         categories.push(
-            <li onClick={() => handleClick(Data[i]._id)} key={i} className='lead ml-5'>{Data[i].name}</li>
+            <li onClick={() => handleClick(Data[i]._id, i)} key={i} className='lead ml-5'>{Data[i].name}</li>
         );
       };
       return categories;

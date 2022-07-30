@@ -15,21 +15,20 @@ exports.signin = function(req, res, next) {
 };
 
 exports.currentUser = function(req, res) {
-  const user = {
-    email: req.user.email,
-    token: tokenForUser(req.user),
-    id: req.user._id,
-    categories: req.user.categories
-  };
-  console.log(user);
-  res.send(user);
+  User.findOne({_id: req.user._id}, function(err, user) {
+    const User = {
+      email: user.email,
+      token: tokenForUser(user),
+      id: req.user._id,
+      categories: user.categories
+    };
+    res.send(user);
+  });
 };
 
 exports.signup = function(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
-
-  console.log(email);
 
   if (!email || !password) {
     return res.status(422).send({ error: 'You must provide email and password'});

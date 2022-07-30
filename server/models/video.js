@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 
 const videoSchema = new Schema ({
   title: String,
-  description: String,
-  thumbnailUrl: String,
-  link: String
+  thumbnail: String,
+  url: String
 });
 
 // module.exports = mongoose.model("Video", videoSchema);

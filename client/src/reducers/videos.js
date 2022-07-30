@@ -1,6 +1,4 @@
-import { VIDEOS } from "../actions";
-
-const PromiseResult = 'PromiseResult'
+import { VIDEOS } from "../actions/types";
 
 const videoReducer = function(state = [], action) {
   switch(action.type) {
@@ -10,5 +8,6 @@ const videoReducer = function(state = [], action) {
       return state;  
   }
 }
+
 
 export default videoReducer;
