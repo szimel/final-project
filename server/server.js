@@ -12,6 +12,17 @@ mongoose.connect(keys.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(cors());
+
+
+mainRoutes(app);
+
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets
   // like our main.js file, or main.css file!
@@ -23,18 +34,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
-}
-
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(cors());
-
-
-mainRoutes(app);
+};
 
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
