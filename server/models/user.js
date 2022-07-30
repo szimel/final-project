@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Video = require('./video');
 const Category = require('./category');
 const Schema = mongoose.Schema;
 var crypto = require('crypto');
