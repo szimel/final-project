@@ -21,7 +21,6 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
-    console.log(data);
     dispatch(signup(data, () => {
       navigate("/", { replace: true });
     }));

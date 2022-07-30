@@ -2,18 +2,18 @@ import axios from "axios";
 import { AUTH_USER, AUTH_ERROR, CURRENT_USER, USER_CATEGORY, VIDEO_ID, VIDEOS, CATEGORY_ID } from './types'
 
 
-const ROOT_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q='
+const ROOT_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&q='
 const SERVER_URL = 'http://localhost:5000';
 
 
 //add specific category id to state
-export const findSpecificCategory = (id, i, callback) => dispatch => {
+export const findSpecificCategory = (id, callback) => dispatch => {
   const config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     }
   };
-  axios.post(`${SERVER_URL}/category`, {categoryId: id, categoryArray: i}, config)
+  axios.post(`${SERVER_URL}/category`, {categoryId: id}, config)
   .then(function (response) {
     dispatch({ type: CATEGORY_ID, payload: response.data });
     callback();
@@ -43,7 +43,6 @@ export const addToCategory = (id, video, i, callback) => dispatch => {
     video: video,
     categoryArray: i,
   };
-  debugger;
   axios.post(`${SERVER_URL}/video`, { data }, config)
   .then(function (response) {
     dispatch({ type: USER_CATEGORY, payload: response.data });

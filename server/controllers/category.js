@@ -24,15 +24,14 @@ exports.newCategory = function(req, res) {
         });
       });
     });
-  })
-}
-
+  });
+};
 
 // add video to correct category
 exports.addVideoToCategory = function(req, res) {
   User.findOne({_id: req.user._id}, function (err, user) {
     const chooser = req.body.data.categoryArray;
-    const video = req.body.data.video
+    const video = req.body.data.video;
     user.categories[chooser].videos.push(video);
     user.save(function (err, user) {
       res.send(user);
@@ -40,12 +39,3 @@ exports.addVideoToCategory = function(req, res) {
   });
 };
  
-//users categories
-exports.getCategory = function(req, res) {
-  User.findOne({_id: req.user._id}, function (err, user) {
-    res.send({
-      categories: user.categories,
-      categoriesCount: user.categories.length
-    });
-  });
-};

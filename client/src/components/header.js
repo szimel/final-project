@@ -13,9 +13,6 @@ const Header = () => {
   const navigate = useNavigate();
   const authenticated = useSelector(state => state.auth.authenticated);
 
-  const check = useSelector(state => state.categoryId);
-  console.log(check)
-
   useEffect (() => {
   dispatch(currentUser());
   }, []);
@@ -26,9 +23,8 @@ const Header = () => {
     }));
   };
 
-  const categoryClick = (id, i) => {
-    console.log('click')
-    dispatch(findSpecificCategory(id, i, () => {
+  const categoryClick = (id) => {
+    dispatch(findSpecificCategory(id, () => {
       navigate('category', { replace: true });
     }));
   }
@@ -41,12 +37,16 @@ const Header = () => {
     if(Data === [] || Data === undefined) {
       return (
           <NavDropdown.Item>No Categories!</NavDropdown.Item>
-      ) 
+      );
+    } else if (Data.length === 0){
+      return (
+        <NavDropdown.Item>No Categories!</NavDropdown.Item>
+      );
     } else {
       for (let i = 0; i < Data.length; i++) {
         categories.push(
             <NavDropdown.Item key={[i]} onClick={() => 
-            categoryClick(Data[i]._id, i)}>{Data[i].name}</NavDropdown.Item>
+            categoryClick(i)}>{Data[i].name}</NavDropdown.Item>
         );
       };
       return categories;

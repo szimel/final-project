@@ -14,12 +14,6 @@ const categorySchema = Yup.object().shape({
 const Category = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   dispatch(currentUser());
-  // }, []);
-  // const id = useSelector(state => state.currentUser);
-  // console.log(id);
  
   const { register, handleSubmit, formState: { errors }} = useForm({
     resolver: yupResolver(categorySchema)

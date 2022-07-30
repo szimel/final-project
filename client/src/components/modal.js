@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addToCategory, currentUser } from '../actions';
 
 const VideoToCategory = () => {
@@ -30,6 +30,7 @@ const VideoToCategory = () => {
       title: videoFinder.snippet.title,
       thumbnail: videoFinder.snippet.thumbnails.medium.url
     };
+    handleClose();
     dispatch(addToCategory(id, videoFormat, i, () => {
       navigate("/", { replace: true });
     }))
@@ -47,7 +48,7 @@ const VideoToCategory = () => {
     } else {
       for (let i = 0; i < Data.length; i++) {
         categories.push(
-            <li onClick={() => handleClick(Data[i]._id, i)} key={i} className='lead ml-5'>{Data[i].name}</li>
+            <li onClick={() => handleClick(Data[i]._id, i)} key={i} className='lead list-group-item list-group-item-action list-group-item-secondary' >{Data[i].name}</li>
         );
       };
       return categories;
@@ -67,17 +68,12 @@ const VideoToCategory = () => {
         <Modal.Body>
           <Container>
             <Row xs={18} md={12} >
-              <ul >  
+              <ul className='list-group list-group'>  
                 {renderCategories()}
               </ul>
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
