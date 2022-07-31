@@ -6,6 +6,7 @@ import Search from './search';
 import { signout } from '../actions';
 import { currentUser, findSpecificCategory } from '../actions';
 import '../App.css';
+import Steps from './steps';
 
 
 const Header = () => {
@@ -57,7 +58,7 @@ const Header = () => {
     return (
       <Navbar variant='light' expand='lg' className='color-nav'>
       <Container>
-        <Navbar.Brand href="/">Categorizer</Navbar.Brand>
+        <Navbar.Brand href="/">YouTube Organizer</Navbar.Brand>
         <Nav className='me-auto'>
           <Nav.Link href="new-category">New Category</Nav.Link>
           <NavDropdown title="My Categories">{renderCategories()}</NavDropdown>
@@ -72,17 +73,20 @@ const Header = () => {
     );
   } else {
     return (
-      <Navbar bg='light' expand='lg'>
-        <Container >
-          <Navbar.Brand href="/">Categorizer</Navbar.Brand>
-          <Nav className='me-auto'>
-            <Nav.Link href="signup">Sign Up</Nav.Link>
-            <Nav.Link href="signin">Sign In</Nav.Link>
-          </Nav>
-          <Nav className='ms-auto me-2'>
-          </Nav>
-        </Container>
-      </Navbar> 
+      <>
+        <Navbar bg='light' expand='lg'>
+          <Container >
+            <Navbar.Brand href="/">YouTube Organizer</Navbar.Brand>
+            <Nav className='me-auto'>
+              <Nav.Link href="signup">Sign Up</Nav.Link>
+              <Nav.Link href="signin">Sign In</Nav.Link>
+            </Nav>
+            <Nav className='ms-auto me-2'>
+            </Nav>
+          </Container>
+        </Navbar> 
+        <Steps />
+      </>
     );
   };
 };

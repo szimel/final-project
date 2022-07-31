@@ -16,7 +16,7 @@ const BasicNavbar = () => {
     return (
       <Navbar variant="light" expand="lg" className="color-nav">
       <Container>
-        <Navbar.Brand  href="/">Categorizer</Navbar.Brand>
+        <Navbar.Brand  href="/">YouTube Organizer</Navbar.Brand>
         <Nav className='ms-auto me-2'>
           <Nav.Link>{data.email}</Nav.Link>
           <Nav.Link href='/'>Home</Nav.Link>
@@ -28,7 +28,7 @@ const BasicNavbar = () => {
     return (
       <Navbar variant="light" expand="lg" className="color-nav">
         <Container>
-          <Navbar.Brand  href="/">Categorizer</Navbar.Brand>
+          <Navbar.Brand  href="/">YouTube Organizer</Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
           </Navbar.Collapse>
         </Container>
