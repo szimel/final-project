@@ -31,7 +31,7 @@ const Search = () => {
           aria-label="Search"
           onChange={validateSearch}
         />
-        <Button variant="btn btn-outline-secondary" className='m-1' onClick={handleSubmit} type='submit'>Search</Button>
+        <Button variant="btn btn-outline-secondary" className='m-1' onClick={handleSubmit}>Search</Button>
       </Form> 
     </Col>
   );
