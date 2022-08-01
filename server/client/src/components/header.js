@@ -79,7 +79,7 @@ const Header = () => {
             <Navbar.Brand href="/">YouTube Organizer</Navbar.Brand>
             <Nav className='me-auto'>
               <Nav.Link href="signup">Sign Up</Nav.Link>
-              <Nav.Link href="signin">Log In</Nav.Link>
+              <Nav.Link href="signin">Login</Nav.Link>
             </Nav>
             <Nav className='ms-auto me-2'>
             </Nav>

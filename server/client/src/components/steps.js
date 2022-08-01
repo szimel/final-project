@@ -16,7 +16,7 @@ const Steps = () => {
     <div className='row mt-5 pt-5 '>
       <div className="offset-md-3 col-md-6 color edges">
         <div className="font pt-4 m-3">
-          <strong>Step 1:</strong> <u onClick={() => signUp()}>Sign up</u> or <u onClick={() => logIn()}>Log In</u>.
+          <strong>Step 1:</strong> <u onClick={() => signUp()}>Sign up</u> or <u onClick={() => logIn()}>Login</u>.
         </div>
         <div className="font m-3">
           <strong>Step 2:</strong> Create a category!
