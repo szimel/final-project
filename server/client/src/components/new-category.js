@@ -30,7 +30,22 @@ const Category = () => {
       <div>
         <BasicNavbar />
       </div>
-      <div className='container pt-3'>
+      <div className='row mt-5 pt-5 '>
+        <div className="offset-4 col-md-3 color edges">
+        <form onSubmit={handleSubmit(HandleFormSubmit)}>
+          <div className='form-group row col-10 offset-md-1'>
+            <label className="mt-2">New Category</label>
+            <input
+              className='form-control mt-2'
+              {...register('category', {required: true})}>
+            </input>
+              {errors.email?.message}
+          </div>
+            <button className="btn btn-outline-secondary offset-md-1 mt-2 mb-2" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      {/* <div className='container pt-3'>
         <form onSubmit={handleSubmit(HandleFormSubmit)}>
           <div className='form-group row col-4'>
             <label>New Category</label>
@@ -40,9 +55,9 @@ const Category = () => {
             </input>
               {errors.email?.message}
           </div>
-          <button className="btn btn-primary mt-3" type="submit">Submit</button>
+          <button className="btn btn-outline-secondary mt-3" type="submit">Submit</button>
         </form>
-      </div>
+      </div> */}
     </div>
   )
 }

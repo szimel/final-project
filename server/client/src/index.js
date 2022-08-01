@@ -14,6 +14,8 @@ import UserCategory from './components/category'
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
+document.body.style='background: #FFFDD0;'
+
 render (
   <Provider store={store}>
     <Router>

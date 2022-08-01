@@ -33,7 +33,7 @@ const Category = () => {
       for (let i = 0; i < Data.length; i++) {
         const element = Data[i];
         cards.push(
-          <Card bg={'light'} style={{ width: '18rem' }} key={i} className='m-1' onClick={() => click(element.url)}>
+          <Card style={{ width: '18rem' }} key={i} className='m-1' onClick={() => click(element.url)}>
             <Card.Img varient='top' src={element.thumbnail} />
             <Card.Body>
               <Card.Title >{element.title}</Card.Title>

@@ -1,10 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@700&family=Mulish:wght@300&display=swap");
 .color-nav {
-  background-color: #e3f2fd;
+  background-color: white;
 }
 
 .font {
   font-family: "Alegreya", serif;
   font-family: "Mulish", sans-serif;
   font-size: xxx-large;
+}
+
+.color {
+  background-color: white;
+}
+
+.edges {
+  border-radius: 40px;
 }

@@ -28,10 +28,10 @@ const Cards = () => {
     } else {
       for (let i = 0; i < videos.length; i++) {
         cards.push(
-          <Card bg={'light'} style={{ width: '18rem' }} key={i} className='m-1' >
+          <Card style={{ width: '18rem' }} key={i} className='m-1 color' >
             <Card.Img varient='top' src={videos[i].snippet.thumbnails.medium.url} onClick={() => click(videos[i].id.videoId)}/>
             <Card.Body>
-              <Card.Title onClick={() => click(videos[i].id.videoId)}>{videos[i].snippet.title}</Card.Title>
+              <Card.Title onClick={() => click(videos[i].id.videoId)}>{decodeURIComponent(videos[i].snippet.title)}</Card.Title>
               <div onClick={() => cardId(videos[i].id.videoId)}>
                 <Modal />
               </div>

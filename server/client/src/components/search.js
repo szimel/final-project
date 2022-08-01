@@ -27,13 +27,13 @@ const Search = () => {
         <Form.Control
           type="search"
           placeholder="Search"
-          className=""
+          className="m-1"
           aria-label="Search"
           onChange={validateSearch}
         />
-      <Button variant="outline-primary" onClick={handleSubmit}>Search</Button>
-    </Form> 
-  </Col>
+        <Button variant="btn btn-outline-secondary" className='m-1' onClick={handleSubmit}>Search</Button>
+      </Form> 
+    </Col>
   );
 };
 

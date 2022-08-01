@@ -29,8 +29,9 @@ const BasicNavbar = () => {
       <Navbar variant="light" expand="lg" className="color-nav">
         <Container>
           <Navbar.Brand  href="/">YouTube Organizer</Navbar.Brand>
-          <Navbar.Collapse id="basic-navbar-nav">
-          </Navbar.Collapse>
+          <Nav className='ms-auto me-2'>
+          <Nav.Link href='/'>Home</Nav.Link>
+        </Nav>
         </Container>
       </Navbar>
     );
