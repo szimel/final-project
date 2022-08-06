@@ -17,9 +17,11 @@ const BasicNavbar = () => {
       <Navbar variant="light" expand="lg" className="color-nav">
       <Container>
         <Navbar.Brand  href="/">YouTube Organizer</Navbar.Brand>
+        <Nav>
+          <Nav.Link href='/'>Home</Nav.Link>
+        </Nav>
         <Nav className='ms-auto me-2'>
           <Nav.Link>{data.email}</Nav.Link>
-          <Nav.Link href='/'>Home</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
